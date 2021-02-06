@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx/unit
+    container_name: nginx-unit
+    restart: unless-stopped
+    volumes:
+      - ./.unit/config.json:/docker-entrypoint.d/config.json:ro
+      # - ./.nginx/ssl/:/etc/ssl/:ro
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    expose:
+      - "80"
+      - "443"
+      - "8080"

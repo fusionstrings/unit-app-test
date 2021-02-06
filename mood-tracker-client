@@ -1,0 +1,15 @@
+mood-tracker-client:
+    image: nginx/unit
+    ports: 
+      - 8080:8080
+    expose:
+      - "8080"
+    depends_on:
+      - mood-tracker-api
+    volumes:
+      - type: bind
+        source: ./node_modules/@tvrtkom/mood-tracker-client/dist/mood-tracker-client
+        target: /app
+      - type: bind
+        source: ./nginx-unit/client-config.json
+        target: /docker-entrypoint.d/config.json
