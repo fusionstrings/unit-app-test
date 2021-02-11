@@ -1,10 +1,19 @@
 services:
-  unit:
+  unit-test-app:
     build: .
-    restart: unless-stopped
+    # image: nginx/unit:1.22.0-node15
+    # container_name: nginx-unit
+    # restart: unless-stopped
     volumes:
-      - ./.unit/config.json:/docker-entrypoint.d/config.json:ro
+      - ./.unit/config-static.json:/docker-entrypoint.d/config.json:ro
+      - ./public:/www/public
+      - ./src:/www/modules
+      - ./www/app.js:/www/app.js
       # - ./.nginx/ssl/:/etc/ssl/:ro
+    # volumes:
+    #   - type: bind
+    #     source: ./www/config.json
+    #     target: /docker-entrypoint.d/config.json
     ports:
       - 80:80
       - 443:443

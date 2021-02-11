@@ -1,12 +1,16 @@
-version: '3.9'
 services:
   nginx:
     image: nginx/unit
     container_name: nginx-unit
     restart: unless-stopped
-    volumes:
-      - ./.unit/config.json:/docker-entrypoint.d/config.json:ro
+    # volumes:
+    #   - ./.unit/config.json:/docker-entrypoint.d/config.json:ro
       # - ./.nginx/ssl/:/etc/ssl/:ro
+    volumes:
+      - type: bind
+      - type: bind
+        source: ./www/new-config.json
+        target: /docker-entrypoint.d/config.json
     ports:
       - 80:80
       - 443:443
