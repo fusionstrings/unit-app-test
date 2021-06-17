@@ -21,7 +21,10 @@ COPY package.json package-lock.json *yarn* ./
 RUN npm install
 # same as "working_directory" in config.json
 COPY www/app.js ./app.js
-#COPY ./www/new-config.json /docker-entrypoint.d/config.json
+COPY ./.unit/config-static.json /docker-entrypoint.d/config.json
+COPY ./public ./public
+COPY ./src ./modules
+
 RUN ls
 
 #RUN npm install -g unit-http && npm link unit-http
